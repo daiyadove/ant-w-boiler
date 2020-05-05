@@ -1,3 +1,3 @@
-import { init } from './plugins/initThree';
+import init from './plugins/initThree'
 
-init();
+init()
