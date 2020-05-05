@@ -27,7 +27,7 @@ const init = () => {
   renderer.setPixelRatio(window.devicePixelRatio)
 
   renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setSize(640, 480)
   renderer.domElement.style.position = 'absolute'
   renderer.domElement.style.top = '0px'
   renderer.domElement.style.left = '0px'
@@ -35,10 +35,6 @@ const init = () => {
 
   // init scene and camera
   const scene = new THREE.Scene()
-
-  /**
-   * Initialize a basic camera
-   */
 
   // Create a camera
   const camera = new THREE.Camera()

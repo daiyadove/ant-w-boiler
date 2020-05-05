@@ -16,7 +16,9 @@ const initARJS = (scene, camera, onRenderFcts, renderer) => {
     }
   }
   arToolkitSource.init(() => {
-    onResize()
+    setTimeout(() => {
+      onResize()
+    }, 1000)
   })
 
   // handle resize
