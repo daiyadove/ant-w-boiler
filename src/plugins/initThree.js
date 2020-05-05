@@ -1,14 +1,16 @@
 import initARJS from './initAR'
 
-const addDefaultObject = (smoothedRoot, onRenderFcts) => {
-  const geometry = new THREE.TorusKnotGeometry(0.3, 0.1, 64, 16)
-  const material = new THREE.MeshNormalMaterial()
-  const mesh = new THREE.Mesh(geometry, material)
-  mesh.position.y = 0.5
-  smoothedRoot.add(mesh)
-  onRenderFcts.push((delta) => {
-    mesh.rotation.x += Math.PI * delta
+const addDefaultObject = (scene, onRenderFcts) => {
+  // add a torus knot
+  const cubeGeometry = new THREE.CubeGeometry(100, 100, 100)
+  const cubeMaterial = new THREE.MeshNormalMaterial({
+    transparent: true,
+    opacity: 0.5,
+    side: THREE.DoubleSide
   })
+  const cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial)
+  cubeMesh.position.y = cubeGeometry.parameters.height / 2
+  scene.add(cubeMesh)
 }
 
 const init = () => {
@@ -48,9 +50,7 @@ const init = () => {
 
   const smoothedRoot = initARJS(scene, camera, onRenderFcts, renderer)
   addDefaultObject(smoothedRoot, onRenderFcts)
-  onRenderFcts.push(() => {
-    renderer.render(scene, camera)
-  })
+  onRenderFcts.push(() => renderer.render(scene, camera))
 
   const animate = () => {
     // keep looping
