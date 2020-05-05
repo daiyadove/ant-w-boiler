@@ -29,9 +29,12 @@ const initARJS = (scene, camera, onRenderFcts, renderer) => {
    */
   // create atToolkitContext
   const arToolkitContext = new THREEx.ArToolkitContext({
-    cameraParametersUrl: `${THREEx.ArToolkitContext.baseURL}../data/data/camera_para.dat`,
     detectionMode: 'mono',
-    maxDetectionRate: 30
+    canvasWidth: 480,
+    canvasHeight: 640,
+  }, {
+    sourceWidth: 480,
+    sourceHeight: 640,
   })
   // initialize it
   arToolkitContext.init(() => {
@@ -49,9 +52,9 @@ const initARJS = (scene, camera, onRenderFcts, renderer) => {
   /**
    * Create a ArMarkerControls
    */
-  const markerRoot = new THREE.Group
-  scene.add(markerRoot)
-  const artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
+  // const markerRoot = new THREE.Group()
+  // scene.add(markerRoot)
+  const artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, camera, {
     type: 'nft',
     descriptorsUrl: 'NFTData/pinball',
     changeMatrixMode: 'cameraTransformMatrix'
@@ -60,14 +63,18 @@ const initARJS = (scene, camera, onRenderFcts, renderer) => {
   scene.visible = false
 
   // build a smoothedControls
-  const smoothedRoot = new THREE.Group()
-  scene.add(smoothedRoot)
-  const smoothedControls = new THREEx.ArSmoothedControls(smoothedRoot, {
-    lerpPosition: 0.4,
-    lerpQuaternion: 0.3,
-    lerpScale: 1,
-  })
+  // const smoothedRoot = new THREE.Group()
+  // scene.add(smoothedRoot)
+  // const smoothedControls = new THREEx.ArSmoothedControls(smoothedRoot, {
+  //   lerpPosition: 0.4,
+  //   lerpQuaternion: 0.3,
+  //   lerpScale: 1,
+  // })
 
+  // onRenderFcts.push(() => {
+  //   smoothedControls.update(markerRoot)
+  // })
+  const smoothedRoot = scene
   return smoothedRoot
 }
 
